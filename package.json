@@ -1,0 +1,7 @@
+{
+  "name": "photon-composer",
+  "version": "0.0.1",
+    "dependencies": {
+	"js-yaml":"3.8.4"
+  }
+}

@@ -18,6 +18,22 @@ try {
     var dockerComposeContents = yaml.safeDump( {
 	"version":"2",
 	"services": {
+	    "identifier": {
+		"image": "semtech/mu-identifier:1.0.0",
+		"links": [
+		    "dispatcher:dispatcher"
+		],
+		"ports": [
+		    "80:80"
+		]},
+	    "dispatcher": {
+		"image": "semtech/mu-dispatcher:1.0.1",
+		"links": [
+		    "photon:photon"
+		],
+		"volumes": [
+		    "./config/dispatcher:/config"
+		]},
 	    "photon": {
 		"image": "photon:" + config["photon"],
 		"links": [
@@ -52,6 +68,9 @@ try {
 		]
 	    },
 	}});
+
+    // copy the dispatcher configuration files
+    exec("mkdir -p photon/config/dispatcher && cp config/dispatcher/dispatcher.ex photon/config/dispatcher/dispatcher.ex", function(stdout, stderr) {});
 
     // write the docker-compose file in the photon (test specification) directory
     fs.writeFile("photon/docker-compose.yml", dockerComposeContents, function(err) {

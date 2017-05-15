@@ -35,10 +35,13 @@ try {
 		    "./config/dispatcher:/config"
 		]},
 	    "photon": {
-		"image": "photon:" + config["photon"],
+		"image": "flowofcontrol/photon:" + config["photon"],
 		"links": [
 		    "app:app",
-		    "delta:db"
+		    "db:db"
+		],
+		"volumes": [
+		    ".:/photon"
 		],
 		"ports": [
 		    "3000:3000"

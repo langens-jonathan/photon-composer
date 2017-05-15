@@ -1,5 +1,5 @@
 specification: "https://github.com/langens-jonathan/photon-specification-test.git"
-photon: "beta-0.0.1"
+photon: "latest"
 image: "testing1"
 tag: "001"
 volumes:
